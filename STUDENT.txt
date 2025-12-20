@@ -1,0 +1,19 @@
+API Base URL:
+https://story-api.dicoding.dev/v1
+
+Map Tile Source:
+https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+
+Additional API Keys:
+Tidak digunakan (Menggunakan OpenStreetMap/Leaflet)
+
+Catatan:
+Aplikasi menggunakan Web API: Geolocation, MediaStream (Camera), Fetch API, dan SweetAlert2.
+
+Deployment URL:
+<masukkan-URL-deploy-Anda-di-sini>
+
+Instruksi singkat deploy:
+- Build: `npm run build`
+- Deploy `dist/` ke Netlify/GitHub Pages/ Firebase Hosting
+- Pastikan `manifest.json` dan `sw.js` ada di root `dist` setelah build
