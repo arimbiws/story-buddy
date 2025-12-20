@@ -10,6 +10,9 @@ const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
     // Store untuk menyimpan antrian upload (Sync saat kembali online)
     // Menggunakan autoIncrement true karena data offline belum punya ID dari server
     database.createObjectStore("offline-queue", { keyPath: "id", autoIncrement: true });
+
+    // Favorites (Bookmark)
+    database.createObjectStore("favorites", { keyPath: "id" });
   },
 });
 
@@ -45,6 +48,20 @@ const DBHelper = {
   },
   async deleteFromQueue(id) {
     return (await dbPromise).delete("offline-queue", id);
+  },
+  
+  // --- FAVORITES (BOOKMARK) ---
+  async getFavorite(id) {
+    return (await dbPromise).get("favorites", id);
+  },
+  async getAllFavorites() {
+    return (await dbPromise).getAll("favorites");
+  },
+  async putFavorite(story) {
+    return (await dbPromise).put("favorites", story);
+  },
+  async deleteFavorite(id) {
+    return (await dbPromise).delete("favorites", id);
   },
 };
 

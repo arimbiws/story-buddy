@@ -1,4 +1,4 @@
-import { config } from "../config"; // Pastikan path import CONFIG benar
+import { config } from "../config";
 
 const NotificationHelper = {
   async requestPermission() {

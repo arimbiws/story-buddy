@@ -132,6 +132,7 @@ class Navbar extends HTMLElement {
                 ? `
                 <li><a href="/" data-link>Daftar Cerita</a></li>
                 <li><a href="/add-story" data-link>Buat Cerita</a></li>
+                <li><a href="/favorites" data-link>Favorit</a></li>
                 <li><a href="/about" data-link>Tentang</a></li>
                 <li>
                   <!-- BUTTON TOGGLE NOTIFIKASI -->

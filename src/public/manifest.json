@@ -81,10 +81,10 @@
       "icons": [{ "src": "images/icons/maskable_icon_x96.png", "sizes": "96x96" }]
     },
     {
-      "name": "Lihat Cerita",
-      "short_name": "Beranda",
-      "description": "Lihat cerita terbaru",
-      "url": "/",
+      "name": "Favorit Saya",
+      "short_name": "Favorit",
+      "description": "Lihat cerita yang disimpan",
+      "url": "/favorites",
       "icons": [{ "src": "images/icons/maskable_icon_x96.png", "sizes": "96x96" }]
     }
   ]
