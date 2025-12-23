@@ -2,7 +2,7 @@
   "name": "Story Buddy App - Aplikasi Berbagi Cerita  ",
   "short_name": "StoryBuddy",
   "description": "Aplikasi berbagi cerita dengan fitur offline, bookmark, dan notifikasi.",
-  "start_url": "./",
+  "start_url": "/story-buddy/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4682b4",
