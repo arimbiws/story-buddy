@@ -146,7 +146,7 @@ class Navbar extends HTMLElement {
       <div class="main-header container">
         <div class="brand">
           <a href="/" data-link>
-            <img src="/images/logo.png" alt="Story Buddy Logo" class="brand-logo"  />
+            <img src="./images/logo.png" alt="Story Buddy Logo" class="brand-logo"  />
           </a>
         </div>
         <nav id="navigation-drawer" class="navigation-drawer">

@@ -5,15 +5,32 @@ Map Tile Source:
 https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 
 Additional API Keys:
-Tidak digunakan (Menggunakan OpenStreetMap/Leaflet)
+Tidak digunakan (menggunakan layanan OpenStreetMap/Leaflet tanpa API key)
 
 Catatan:
-Aplikasi menggunakan Web API: Geolocation, MediaStream (Camera), Fetch API, dan SweetAlert2.
+Aplikasi menggunakan Web API berikut:
+- Geolocation API untuk mendapatkan lokasi
+- MediaStream API untuk akses kamera
+- Fetch API untuk HTTP request ke API
+- Service Worker (Workbox) untuk PWA & caching
+- Push Notification melalui Service Worker
+- IndexedDB (idb) untuk cache dan offline queue
+- SweetAlert2 untuk elemen notifikasi interaktif
 
 Deployment URL:
-<masukkan-URL-deploy-Anda-di-sini>
+https://arimbiws.github.io/story-buddy/
 
-Instruksi singkat deploy:
-- Build: `npm run build`
-- Deploy `dist/` ke Netlify/GitHub Pages/ Firebase Hosting
-- Pastikan `manifest.json` dan `sw.js` ada di root `dist` setelah build
+Instruksi deploy singkat:
+1. Install dependencies:
+    npm install
+
+2. Build aplikasi:
+    npm run build
+
+3. Deploy folder dist/ ke platform hosting (mis. GitHub Pages):
+    npm run deploy
+
+Pastikan setelah build:
+- `manifest.json` muncul di dalam `dist/`
+- `sw.js` muncul di dalam `dist/`
+- Semua file static (icon, screenshot) sudah ikut ter-copy ke `dist/`

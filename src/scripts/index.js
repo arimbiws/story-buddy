@@ -26,8 +26,8 @@ export const navigateTo = (url) => {
 
 // SERVICE WORKER & PWA
 if ("serviceWorker" in navigator) {
-  // const wb = new Workbox("/sw.js");
-  const wb = new Workbox(`${process.env.PUBLIC_URL || ""}/sw.js`);
+  const wb = new Workbox("/sw.js");
+  // const wb = new Workbox(`${process.env.PUBLIC_URL || ""}/sw.js`);
 
   wb.addEventListener("waiting", () => {
     // Prompt user to reload for update
