@@ -9,7 +9,7 @@ const initCamera = async () => {
   let stopCamera = () => {};
 
   if (!video || !captureBtn || !cameraSection) {
-    console.error("❌ Elemen kamera tidak ditemukan di DOM.");
+    console.error("Elemen kamera tidak ditemukan di DOM.");
     return stopCamera;
   }
 
@@ -86,7 +86,7 @@ const initCamera = async () => {
       title: "Akses Kamera Ditolak",
       text: "Harap izinkan akses kamera agar dapat mengambil foto. " + "Periksa pengaturan browser Anda.",
     });
-    console.error("❌ Kamera gagal diakses:", err);
+    console.error("Kamera gagal diakses:", err);
   }
 
   return stopCamera;

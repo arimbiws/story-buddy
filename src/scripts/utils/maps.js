@@ -2,7 +2,7 @@ import L from "leaflet";
 import iconUrl from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
-// ini iconnya dibilang ilang pas pake webpack
+// Set default icon untuk Leaflet
 const DefaultIcon = L.icon({
   iconUrl,
   shadowUrl: iconShadow,
@@ -28,7 +28,6 @@ const renderMap = (stories = []) => {
   // L.control.layers({ Default: defaultLayer, Satellite: satellite }).addTo(map);
 
   // Tambahkan marker untuk setiap story
-  // const markers = [];
   const markers = [];
 
   const storyLayer = L.layerGroup();

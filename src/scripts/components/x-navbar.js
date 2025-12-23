@@ -7,14 +7,12 @@ class Navbar extends HTMLElement {
   }
 
   async connectedCallback() {
-    // 1. Render awal (mungkin tombol masih loading/default)
     this.render();
 
-    // 2. Cek status notifikasi yang sebenarnya dari browser/SW
+    // Cek status notifikasi yang sebenarnya dari browser/SW
     await this._checkNotificationStatus();
     this._initDrawer(); // Inisialisasi drawer setelah render
 
-    // 3. Setup Listener
     if (!this._authListenerAdded) {
       window.addEventListener("authChanged", () => {
         this.render();
@@ -46,7 +44,7 @@ class Navbar extends HTMLElement {
 
       e.preventDefault();
 
-      // Feedback visual loading (opsional)
+      // button loading
       btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Proses...`;
       btn.disabled = true;
 
@@ -136,11 +134,9 @@ class Navbar extends HTMLElement {
     // Tentukan tampilan tombol berdasarkan state this._isSubscribed
     const notifBtnClass = this._isSubscribed ? "btn-notif-active" : "btn-notif-inactive";
     const notifBtnIcon = this._isSubscribed ? "fa-bell" : "fa-bell-slash";
-    // const notifBtnText = this._isSubscribed ? "Notif On" : "Notif Off";
     const notifBtnTitle = this._isSubscribed ? "Matikan Notifikasi" : "Hidupkan Notifikasi";
 
     // Style inline sederhana untuk membedakan tombol aktif/nonaktif
-    // Anda bisa memindahkannya ke style.css nanti
     const activeStyle = "background-color: #2ecc71; color: white; border: none;";
     const inactiveStyle = "background-color: #e74c3c; color: white; border: none;";
     const btnStyle = this._isSubscribed ? activeStyle : inactiveStyle;
@@ -149,9 +145,15 @@ class Navbar extends HTMLElement {
     <header>
       <div class="main-header container">
         <div class="brand">
-          <img href="/" src="/images/logo.png" alt="Story Buddy Logo" class="brand-logo"  />
+          <a href="/" data-link>
+            <img src="/images/logo.png" alt="Story Buddy Logo" class="brand-logo"  />
+          </a>
         </div>
         <nav id="navigation-drawer" class="navigation-drawer">
+          <div class="drawer-header">
+            <h2>Main Menu</h2>
+          </div>
+
           <ul id="nav-list" class="nav-list">
             ${
               token
@@ -212,7 +214,7 @@ class Navbar extends HTMLElement {
 
         if (result.isConfirmed) {
           localStorage.removeItem("token");
-          // Reset state notifikasi saat logout (opsional)
+          // Reset state notifikasi saat logout
           this._isSubscribed = false;
 
           await Swal.fire("Logout Berhasil", "", "success");

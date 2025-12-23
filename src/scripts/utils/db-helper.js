@@ -4,20 +4,20 @@ const { DATABASE_NAME, DATABASE_VERSION, OBJECT_STORE_NAME } = config;
 
 const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
   upgrade(database) {
-    // Store untuk menyimpan data cerita (Read saat offline)
+    // Store utama untuk menyimpan stories
     database.createObjectStore(OBJECT_STORE_NAME, { keyPath: "id" });
 
     // Store untuk menyimpan antrian upload (Sync saat kembali online)
     // Menggunakan autoIncrement true karena data offline belum punya ID dari server
     database.createObjectStore("offline-queue", { keyPath: "id", autoIncrement: true });
 
-    // Favorites (Bookmark)
+    // Store untuk menyimpan cerita favorit (bookmark)
     database.createObjectStore("favorites", { keyPath: "id" });
   },
 });
 
 const DBHelper = {
-  // --- Fitur Read/Cache Data ---
+  // Fitur Read/Cache Data
   async getStory(id) {
     return (await dbPromise).get(OBJECT_STORE_NAME, id);
   },
@@ -31,7 +31,7 @@ const DBHelper = {
     const db = await dbPromise;
     const tx = db.transaction(OBJECT_STORE_NAME, "readwrite");
     const store = tx.objectStore(OBJECT_STORE_NAME);
-    // Kosongkan dulu agar data fresh (opsional, tergantung strategi)
+    // Clear existing data sebelum menambahkan yang baru
     await store.clear();
     for (const story of stories) {
       store.put(story);
@@ -39,7 +39,7 @@ const DBHelper = {
     return tx.done;
   },
 
-  // --- Fitur Advanced: Synchronization Queue ---
+  // Synchronization Queue
   async saveToQueue(storyData) {
     return (await dbPromise).add("offline-queue", storyData);
   },
@@ -50,7 +50,6 @@ const DBHelper = {
     return (await dbPromise).delete("offline-queue", id);
   },
 
-  // --- FAVORITES (BOOKMARK) ---
   async getFavorite(id) {
     return (await dbPromise).get("favorites", id);
   },

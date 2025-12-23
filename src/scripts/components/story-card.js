@@ -85,6 +85,9 @@ class StoryCard extends HTMLElement {
         Swal.fire({
           toast: true,
           position: "top-end",
+          customClass: {
+            popup: "custom-toast",
+          },
           icon: "info",
           title: "Dihapus dari favorit",
           showConfirmButton: false,
@@ -100,6 +103,9 @@ class StoryCard extends HTMLElement {
         Swal.fire({
           toast: true,
           position: "top-end",
+          customClass: {
+            popup: "custom-toast",
+          },
           icon: "success",
           title: "Disimpan ke favorit",
           showConfirmButton: false,

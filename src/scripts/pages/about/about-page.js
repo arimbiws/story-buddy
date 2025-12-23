@@ -7,7 +7,6 @@ const AboutPage = {
           <p class="page-subtitle">Pelajari lebih lanjut tentang aplikasi Story Buddy dan tujuannya</p>
         </header>
 
-
         <div class="about-section">
           <h3>Deskripsi Aplikasi</h3>
           <p>

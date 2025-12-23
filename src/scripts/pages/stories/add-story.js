@@ -4,7 +4,7 @@ import initCamera from "../../utils/camera";
 import L from "leaflet";
 
 const StoryPage = {
-  // State UI Lokal (Koordinat sementara)
+  // State Lokasi Jakarta sebagai default
   _currentLat: -6.175392,
   _currentLon: 106.827153,
 
@@ -66,7 +66,7 @@ const StoryPage = {
   },
 
   async afterRender() {
-    // Inisialisasi MVP
+    // Inisialisasi Presenter dan Model
     const model = new StoriesModel();
     const presenter = new AddStoryPresenter({ view: this, model });
 
@@ -79,13 +79,11 @@ const StoryPage = {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      // Ambil data dari input DOM
-      // FIX: Changed 'desc' to 'description'
+      // Ambil data dari form
       const description = document.getElementById("description").value;
       const photo = document.getElementById("photo").files[0];
 
-      // Panggil Presenter untuk memproses data
-      // FIX: Changed from { desc, ... } to { description, ... }
+      // Panggil Presenter untuk proses upload
       presenter.onUpload({
         description,
         photo,
@@ -95,7 +93,7 @@ const StoryPage = {
     });
   },
 
-  // Logika UI Peta (Leaflet) tetap di View karena ini manipulasi DOM langsung
+  // Logika Peta (Leaflet) tetap di View karena ini manipulasi DOM langsung
   _initMap() {
     const map = L.map("map-add", {
       keyboard: false,
@@ -118,12 +116,11 @@ const StoryPage = {
 
       marker.setLatLng([this._currentLat, this._currentLon]);
 
-      // Update UI Input (Visual feedback)
+      // Update input koordinat
       document.getElementById("lat").value = this._currentLat.toFixed(6);
       document.getElementById("lon").value = this._currentLon.toFixed(6);
 
-      // Opsi: Berikan feedback ke pengguna (memperkuat Skilled)
-      // FIX: Changed ${_currentLat} and ${_currentLon} to ${this._currentLat} and ${this._currentLon}
+      // Tampilkan notifikasi lokasi terpilih
       Swal.fire({
         icon: "info",
         title: "Lokasi Dipilih",
@@ -133,7 +130,7 @@ const StoryPage = {
       });
     });
 
-    // Coba ambil lokasi user
+    // Mendapatkan lokasi user saat ini
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
@@ -153,7 +150,7 @@ const StoryPage = {
     }
   },
 
-  // Logika UI Kamera
+  // Logika Kamera menggunakan helper camera.js
   _initCameraListeners() {
     const openBtn = document.getElementById("openCameraBtn");
     const closeBtn = document.getElementById("closeCameraBtn");

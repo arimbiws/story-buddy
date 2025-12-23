@@ -31,7 +31,7 @@ export const addStory = async ({ description, photo, lat, lon, token }) => {
   return result;
 };
 
-// --- MODIFIKASI: Tambahkan error handling manual agar masuk ke catch block Presenter ---
+// Error handling agar masuk ke catch block Presenter
 export const loginUser = async (email, password) => {
   const res = await fetch(`${config.API_BASE}/login`, {
     method: "POST",

@@ -23,31 +23,10 @@ function constructRouteFromSegments(pathSegments) {
 
 export function getActivePathname() {
   return location.hash.replace("#", "") || "/";
-  // return location.pathname || "/";
 }
 
 export function getActiveRoute() {
   const hash = window.location.hash;
   const path = hash ? hash.replace(/^#/, "") : "/";
   return path || "/";
-
-  // const pathname = location.pathname || "/";
-  // return pathname === "/" ? "/" : pathname;
-  // const pathname = getActivePathname();
-  // const urlSegments = extractPathnameSegments(pathname);
-  // return constructRouteFromSegments(urlSegments);
 }
-
-// export function parseActivePathname() {
-//   const pathname = getActivePathname();
-//   return extractPathnameSegments(pathname);
-// }
-
-// export function getRoute(pathname) {
-//   const urlSegments = extractPathnameSegments(pathname);
-//   return constructRouteFromSegments(urlSegments);
-// }
-
-// export function parsePathname(pathname) {
-//   return extractPathnameSegments(pathname);
-// }

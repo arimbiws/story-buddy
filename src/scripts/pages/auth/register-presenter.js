@@ -1,4 +1,3 @@
-import Swal from "sweetalert2";
 import { navigateTo } from "../../index";
 
 class RegisterPresenter {

@@ -4,7 +4,7 @@ class HomePresenter {
   constructor({ view, model }) {
     this.view = view;
     this.model = model;
-    this._stories = []; // Simpan data asli untuk keperluan filter/search
+    this._stories = []; // Menyimpan semua cerita yang diambil
   }
 
   async showStories() {
@@ -25,20 +25,20 @@ class HomePresenter {
       this.view.initMap(this._stories);
     } catch (error) {
       console.error(error);
-      // Opsional: Tampilkan pesan error di view
     } finally {
       this.view.hideLoading();
     }
   }
 
-  // LOGIKA BARU: Pencarian Client-Side
+  // Fitur pencarian cerita
   searchStories(query) {
     if (!query) {
-      // Jika kosong, kembalikan ke list semula
+      // Jika query kosong, tampilkan semua cerita
       this.view.showStoriesList(this._stories);
       return;
     }
 
+    // Filter cerita berdasarkan nama atau deskripsi yang mengandung query
     const lowerQuery = query.toLowerCase();
     const filteredStories = this._stories.filter((story) => {
       const nameMatch = story.name.toLowerCase().includes(lowerQuery);

@@ -8,19 +8,17 @@ class StoriesModel {
     if (!token) {
       throw new Error("Token tidak ditemukan. Harap login kembali.");
     }
-    // Model memanggil API, bukan View
-    // return await getStories(token);
-
+    
     try {
-      // 1. Coba ambil dari Network
+      // Ambil dari Network
       const response = await getStories(token);
 
-      // 2. Jika sukses, simpan ke IDB untuk cadangan offline
+      // Jika sukses, simpan ke IDB untuk cadangan offline
       await DBHelper.putStories(response);
 
       return response;
     } catch (error) {
-      // 3. Jika Network gagal (Offline), ambil dari IDB
+      // Jika Network gagal (Offline), ambil dari IDB
       console.warn("Offline Mode: Mengambil data dari IndexedDB");
       const offlineStories = await DBHelper.getAllStories();
 
@@ -38,11 +36,11 @@ class StoriesModel {
     if (!token) {
       throw new Error("Token tidak ditemukan. Harap login kembali.");
     }
-    // Normalisasi nama description (beberapa view mengirim 'desc')
+    // Normalisasi nama description 
     const description = storyData.description || storyData.desc || "";
 
     try {
-      // Coba kirim langsung ke API
+      // kirim langsung ke API
       return await addStory({
         description,
         photo: storyData.photo,
@@ -52,7 +50,7 @@ class StoriesModel {
       });
     } catch (error) {
       // Jika gagal kirim (offline), simpan ke Queue IDB
-      // Kita konversi File photo ke base64 agar bisa disimpan di IndexedDB
+      // konversi File photo ke base64 agar bisa disimpan di IndexedDB
       if (!navigator.onLine) {
         try {
           let photoBase64 = null;

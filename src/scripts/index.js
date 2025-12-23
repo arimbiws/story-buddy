@@ -6,7 +6,6 @@ import "./components/x-footer";
 import Swal from "sweetalert2";
 import { Workbox } from "workbox-window";
 import DBHelper from "./utils/db-helper";
-// import { addStory } from "./data/api";
 
 import App from "./pages/app";
 import { addStory } from "./data/api";
@@ -21,11 +20,11 @@ const app = new App({
 export const navigateTo = (url) => {
   // untuk memastikan url diawali dengan '/'
   if (!url.startsWith("/")) url = "/" + url;
-  // set hash -> menghasilkan http://localhost:9000/#/login
+  // set hash -> menghasilkan http://localhost:9000/login
   window.location.hash = url;
 };
 
-// --- LOGIKA SERVICE WORKER & PWA ---
+// SERVICE WORKER & PWA
 if ("serviceWorker" in navigator) {
   const wb = new Workbox("/sw.js");
 
@@ -37,7 +36,7 @@ if ("serviceWorker" in navigator) {
   wb.register();
 }
 
-// --- LOGIKA PUSH NOTIFICATION STATE CHECK ---
+// PUSH NOTIFICATION STATE CHECK
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.ready.then(async (registration) => {
     const subscription = await registration.pushManager.getSubscription();
@@ -46,7 +45,7 @@ if ("serviceWorker" in navigator) {
     }
   });
 }
-// --- LOGIKA SYNC (ADVANCED) ---
+// SYNC (ADVANCED)
 // Ketika kembali online, upload data dari antrian
 window.addEventListener("online", async () => {
   console.log("Kembali Online! Memproses antrian...");
@@ -63,7 +62,7 @@ window.addEventListener("online", async () => {
 
     const token = localStorage.getItem("token");
 
-    // helper: convert base64 to Blob
+    // Fungsi untuk mengubah base64 ke Blob
     const base64ToBlob = (base64, contentType = "image/jpeg") => {
       const byteCharacters = atob(base64);
       const byteNumbers = new Array(byteCharacters.length);
@@ -80,7 +79,7 @@ window.addEventListener("online", async () => {
 
         if (item.photoBase64) {
           const blob = base64ToBlob(item.photoBase64, item.photoType || "image/jpeg");
-          // Create a File so addStory can handle it like normal input
+          // Buat File agar addStory bisa menangani seperti input biasa
           photoFile = new File([blob], `offline-${item.timestamp || Date.now()}.jpg`, { type: item.photoType || "image/jpeg" });
         }
 
@@ -108,7 +107,7 @@ window.addEventListener("online", async () => {
       timer: 3000,
     });
 
-    // Refresh halaman home jika sedang disana
+    // refresh halaman jika sedang di root page
     if (window.location.hash === "" || window.location.hash === "/") {
       window.dispatchEvent(new Event("hashchange"));
     }
@@ -131,7 +130,7 @@ if (skipLink) {
     event.preventDefault(); // Mencegah browser melakukan navigasi hash
 
     // Ambil target (dalam kasus Anda adalah #main-content)
-    const targetId = event.target.getAttribute("#main-content");
+    const targetId = event.target.getAttribute("href");
     const targetElement = document.querySelector(targetId);
 
     if (targetElement) {

@@ -1,4 +1,3 @@
-import Swal from "sweetalert2";
 import { navigateTo } from "../../index";
 
 class LoginPresenter {
@@ -8,7 +7,7 @@ class LoginPresenter {
   }
 
   async onLogin({ email, password }) {
-    // 1. Validasi Input
+    // Validasi Input
     if (!email || !password) {
       Swal.fire({
         icon: "warning",
@@ -18,18 +17,17 @@ class LoginPresenter {
       return;
     }
 
-    // 2. Tampilkan Loading di View
+    // Tampilkan Loading di View
     this.view.setLoading(true);
 
     try {
-      // 3. Panggil Model
+      // Panggil Model
       const response = await this.model.login(email, password);
 
-      // 4. Handle Sukses
-      // Simpan token (bisa juga di model, tapi umum di presenter/utils)
+      // Simpan token di localStorage
       localStorage.setItem("token", response.loginResult.token);
 
-      // Update state auth global (opsional, trigger event custom)
+      // Update state auth global (agar navbar dan lainnya tahu sudah login)
       window.dispatchEvent(new Event("authChanged"));
 
       await Swal.fire({
@@ -42,14 +40,14 @@ class LoginPresenter {
 
       navigateTo("/");
     } catch (error) {
-      // 5. Handle Error
+      // Handle Error
       Swal.fire({
         icon: "error",
         title: "Login Gagal",
         text: error.message || "Terjadi kesalahan pada server.",
       });
     } finally {
-      // 6. Matikan Loading
+      // Matikan Loading
       this.view.setLoading(false);
     }
   }

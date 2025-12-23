@@ -1,4 +1,3 @@
-// import Swal from "sweetalert2";
 import { navigateTo } from "../../index";
 
 class StoryPresenter {
@@ -20,17 +19,16 @@ class StoryPresenter {
     }
 
     try {
-      // UI Interaction: Tampilkan Loading
+      // Tampilkan Loading
       Swal.fire({
         title: "Mengunggah Cerita...",
         allowOutsideClick: false,
         didOpen: () => Swal.showLoading(),
       });
 
-      // Data Operation: Panggil Model
+      // Panggil Model untuk mengirim data
       await this.model.createStory({ description, photo, lat, lon });
 
-      // Success Flow
       Swal.fire({
         icon: "success",
         title: "Berhasil!",

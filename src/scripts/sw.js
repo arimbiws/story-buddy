@@ -5,10 +5,10 @@ import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { config } from "./config";
 
-// 1. Precache App Shell
+// Precache semua aset yang di-generate oleh Workbox di build time
 precacheAndRoute(self.__WB_MANIFEST);
 
-// 2. Caching API (StaleWhileRevalidate)
+// Caching API Response (StaleWhileRevalidate)
 registerRoute(
   ({ url }) => url.href.startsWith(`${config.API_BASE}/stories`),
   new StaleWhileRevalidate({
@@ -25,7 +25,7 @@ registerRoute(
   })
 );
 
-// 3. Caching Image (CacheFirst)
+// Caching Images (CacheFirst)
 registerRoute(
   ({ request }) => request.destination === "image",
   new CacheFirst({
@@ -39,7 +39,7 @@ registerRoute(
   })
 );
 
-// 4. Push Notification Listener
+// Push Notification Listener
 self.addEventListener("push", (event) => {
   let data = {};
 
@@ -77,7 +77,7 @@ self.addEventListener("push", (event) => {
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
-// 5. Notification Click Listener
+// Notification Click Listener
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 

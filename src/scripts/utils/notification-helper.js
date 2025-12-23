@@ -22,7 +22,7 @@ const NotificationHelper = {
 
     const registration = await navigator.serviceWorker.ready;
 
-    // 1. Subscribe ke Browser (Push Manager)
+    // Subscribe ke Browser
     let subscription = await registration.pushManager.getSubscription();
     if (!subscription) {
       const urlBase64ToUint8Array = (base64String) => {
@@ -44,7 +44,7 @@ const NotificationHelper = {
       subscription = await registration.pushManager.subscribe(subscribeOptions);
     }
 
-    // 2. KIRIM DATA SUBSCRIPTION KE SERVER DICODING (Langkah yang sebelumnya hilang)
+    // Kirim subscription ke server
     const token = localStorage.getItem("token");
     if (token) {
       await this._sendSubscriptionToAPI(subscription, token);
@@ -63,9 +63,6 @@ const NotificationHelper = {
       // Unsubscribe dari browser
       await subscription.unsubscribe();
 
-      // Opsional: Hapus juga dari server (jika API mendukung delete)
-      // await this._deleteSubscriptionFromAPI(subscription);
-
       console.log("Berhasil Unsubscribe");
       return true;
     }
@@ -74,11 +71,10 @@ const NotificationHelper = {
   // Fungsi Helper Private untuk Fetch ke API
   async _sendSubscriptionToAPI(subscription, token) {
     try {
-      // 1. Konversi subscription ke JSON Object standard
+      // Konversi subscription ke JSON Object standard
       const subscriptionJson = subscription.toJSON();
 
-      // 2. FILTER DATA: Ambil hanya endpoint dan keys.
-      // Kita membuang 'expirationTime' agar server tidak menolak request.
+      // Buat payload yang hanya berisi data yang diperlukan
       const payload = {
         endpoint: subscriptionJson.endpoint,
         keys: subscriptionJson.keys,
@@ -102,7 +98,6 @@ const NotificationHelper = {
       }
     } catch (error) {
       console.error("Gagal mengirim subscription ke server:", error);
-      // Kita tidak melempar error agar flow di UI tetap dianggap sukses (karena subscribe browser berhasil)
     }
   },
 };

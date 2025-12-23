@@ -109,7 +109,7 @@ main {
   inset-inline-start: 0;
   min-height: 100vh;
   width: 200px;
-  padding: 20px 10px;
+  padding: 2rem 1rem;
   background-color: #fff;
   box-shadow: 0 0 4px 2px #00000033;
   transform: translateX(-100%);
@@ -119,6 +119,19 @@ main {
 
 .navigation-drawer.open {
   transform: translateX(0);
+}
+
+.drawer-header {
+  display: none;
+  margin-bottom: 1rem;
+}
+
+.drawer-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: steelblue;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
 }
 
 .drawer-button {
@@ -136,12 +149,18 @@ main {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px 20px;
-  align-items: center;
+  gap: 2rem;
+  align-items: stretch; /* penting */
+  width: 100%;
+}
+
+.nav-list li a,
+.nav-list li button {
+  border-radius: 6px;
 }
 
 .nav-list li a {
-  padding: 6px 10px;
+  padding: 6px 0px;
   display: block;
   color: #fff;
   text-decoration: none;
@@ -149,6 +168,11 @@ main {
 
 .nav-list li a:hover {
   text-decoration: none;
+}
+
+.logout-btn,
+#loginBtn {
+  padding-left: -1rem;
 }
 
 button {
@@ -583,19 +607,16 @@ input#lat {
   box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* EMPTY STATE FAVORITES */
-/* Agar pesan "Belum ada cerita" berada di tengah vertikal & horizontal */
 #favorite-stories:empty {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50vh; /* Minimal tinggi setengah layar */
+  min-height: 50vh;
 }
 
-/* Mengatur Z-Index SweetAlert agar di bawah Drawer tapi di atas konten */
-div.swal2-container {
-  z-index: 2000 !important; /* Pastikan lebih tinggi dari navbar (biasanya 1000) */
+.custom-toast {
+  margin-top: 80px !important; /* turun di bawah navbar */
 }
 
 /* RESPONSIVE DESIGN */
@@ -603,6 +624,41 @@ div.swal2-container {
   .story-form {
     max-width: 90%;
     padding: 1.5rem;
+  }
+
+  .drawer-header {
+    display: block;
+  }
+
+  .nav-list {
+    gap: 0.5rem;
+  }
+
+  .nav-list li button {
+    width: 100%;
+  }
+
+  .nav-list li a {
+    color: steelblue;
+    text-decoration: none;
+  }
+
+  .nav-list li a:hover {
+    text-decoration: none;
+  }
+
+  .logout-btn {
+    background: none;
+    border: 1px solid steelblue;
+    color: steelblue;
+  }
+
+  .logout-btn:hover {
+    color: #fff;
+  }
+
+  .custom-toast {
+    margin-top: 100px !important;
   }
 }
 
@@ -614,18 +670,19 @@ div.swal2-container {
     align-items: stretch;
   }
 
+  .brand-logo {
+    height: 45px;
+    width: auto;
+  }
+
   .story-card {
     flex-direction: column;
   }
 
-  div.swal2-top-end {
-    top: 70px !important; /* Turunkan supaya tidak menutupi tombol drawer */
-    right: 10px !important;
-  }
-
   .footer {
     font-size: 0.8rem;
-    padding: 15px 5px;
+    padding: 1rem 2.5rem;
+    line-height: 1.2;
   }
 }
 

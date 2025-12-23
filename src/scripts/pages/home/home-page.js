@@ -3,7 +3,7 @@ import StoriesModel from "../../models/stories-model";
 import renderMap from "../../utils/maps";
 import "../../components/story-card.js";
 import { gsap } from "gsap";
-import NotificationHelper from "../../utils/notification-helper"; // Import baru
+import NotificationHelper from "../../utils/notification-helper";
 
 const HomePage = {
   async render() {
@@ -41,7 +41,7 @@ const HomePage = {
   },
 
   async afterRender() {
-    // Inisialisasi MVP Pattern
+    // Inisialisasi Presenter dan Model
     const model = new StoriesModel();
     const presenter = new HomePresenter({ view: this, model });
 
@@ -56,10 +56,10 @@ const HomePage = {
       presenter.searchStories(e.target.value);
     });
 
-    // Panggil Presenter untuk memulai logika
+    // Panggil Presenter
     await presenter.showStories();
 
-    // Animasi UI (Tugas View)
+    // Animasi masuk elemen
     this._animateElements();
   },
 
