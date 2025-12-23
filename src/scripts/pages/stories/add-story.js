@@ -12,7 +12,8 @@ const StoryPage = {
     return `
       <div class="container add-story-page">
         <header class="page-header">
-          <h1 class="page-title">Tambah Cerita</h1>
+          <h2 class="page-title">Tambah Cerita</h2>
+          <p class="page-subtitle">Bagikan pengalamanmu dengan foto dan lokasi</p>
         </header>
 
         <section class="form-section">

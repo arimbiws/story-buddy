@@ -1,55 +1,51 @@
 import routes from "../routes/routes";
 import { getActiveRoute } from "../routes/url-parser";
+import { navigateTo } from "../index"; // Pastikan import navigateTo
 
 class App {
   #content = null;
-  #drawerButton = null;
-  #navigationDrawer = null;
 
-  constructor({ navigationDrawer, drawerButton, content }) {
+  constructor({ content }) {
     this.#content = content;
-    this.#drawerButton = drawerButton;
-    this.#navigationDrawer = navigationDrawer;
-
-    this._setupDrawer();
-  }
-
-  _setupDrawer() {
-    this.#drawerButton.addEventListener("click", () => {
-      this.#navigationDrawer.classList.toggle("open");
-    });
-
-    document.body.addEventListener("click", (event) => {
-      if (!this.#navigationDrawer.contains(event.target) && !this.#drawerButton.contains(event.target)) {
-        this.#navigationDrawer.classList.remove("open");
-      }
-
-      this.#navigationDrawer.querySelectorAll("a").forEach((link) => {
-        if (link.contains(event.target)) {
-          this.#navigationDrawer.classList.remove("open");
-        }
-      });
-    });
   }
 
   async renderPage() {
     const url = getActiveRoute();
     const page = routes[url] || routes["/"]; // fallback ke home
 
+    // Daftar halaman yang boleh diakses tanpa login
+    const publicRoutes = ["/login", "/register"];
+    const token = localStorage.getItem("token");
+    
+    // Jika user belum login DAN mencoba akses halaman selain publicRoutes
+    if (!token && !publicRoutes.includes(url)) {
+      // Redirect ke login
+      navigateTo("/login");
+      return;
+    }
+    
+    // Jika user SUDAH login tapi akses login/register, lempar ke home
+    if (token && publicRoutes.includes(url)) {
+      navigateTo("/");
+      return;
+    }
+    
+    // Eksekusi fungsi dynamic import
+    // Karena routes sekarang berisi fungsi: () => import(...)
+    const pageModule = await page(); 
+    
     const content = this.#content; // ngambil elemen konten
 
-    // Logika View Transition API
+    // Gunakan pageModule sebagai object page
     if (!document.startViewTransition) {
-      // Fallback jika browser tidak mendukung
-      content.innerHTML = await page.render();
-      await page.afterRender();
+      content.innerHTML = await pageModule.render();
+      await pageModule.afterRender();
       return;
     }
 
-    // menerapkan View Transition API
     document.startViewTransition(async () => {
-      content.innerHTML = await page.render();
-      await page.afterRender();
+      content.innerHTML = await pageModule.render();
+      await pageModule.afterRender();
     });
   }
 }

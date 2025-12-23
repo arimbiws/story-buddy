@@ -2,13 +2,13 @@ import { getStories, addStory } from "../data/api";
 import DBHelper from "../utils/db-helper";
 
 class StoriesModel {
-  // Mengambil seluruh cerita [cite: 23, 154]
+  // Mengambil seluruh cerita
   async getAllStories() {
     const token = localStorage.getItem("token");
     if (!token) {
       throw new Error("Token tidak ditemukan. Harap login kembali.");
     }
-    // Model memanggil API, bukan View [cite: 379]
+    // Model memanggil API, bukan View
     // return await getStories(token);
 
     try {

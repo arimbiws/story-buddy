@@ -8,7 +8,7 @@ class StoryPresenter {
   }
 
   async onUpload({ description, photo, lat, lon }) {
-    // Logika Validasi (Presenter Logic) [cite: 103]
+    // Logika Validasi (Presenter Logic)
     if (!description) {
       return Swal.fire("Peringatan", "Deskripsi tidak boleh kosong.", "warning");
     }

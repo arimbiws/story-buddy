@@ -1,5 +1,4 @@
 import { navigateTo } from "../index.js";
-import Swal from "sweetalert2";
 
 class Navbar extends HTMLElement {
   constructor() {
@@ -13,6 +12,7 @@ class Navbar extends HTMLElement {
 
     // 2. Cek status notifikasi yang sebenarnya dari browser/SW
     await this._checkNotificationStatus();
+    this._initDrawer(); // Inisialisasi drawer setelah render
 
     // 3. Setup Listener
     if (!this._authListenerAdded) {
@@ -52,7 +52,7 @@ class Navbar extends HTMLElement {
 
       try {
         if (this._isSubscribed) {
-          // --- LOGIKA UNSUBSCRIBE ---
+          // UNSUBSCRIBE
           const success = await NotificationHelper.unsubscribePush();
           if (success) {
             this._isSubscribed = false;
@@ -65,7 +65,7 @@ class Navbar extends HTMLElement {
             });
           }
         } else {
-          // --- LOGIKA SUBSCRIBE ---
+          // SUBSCRIBE
           const permissionGranted = await NotificationHelper.requestPermission();
           if (permissionGranted) {
             const subscription = await NotificationHelper.subscribePush();
@@ -95,10 +95,35 @@ class Navbar extends HTMLElement {
           text: "Terjadi kesalahan saat mengatur notifikasi.",
         });
       } finally {
-        // Apapun hasilnya, render ulang untuk update tampilan tombol
+        // render ulang untuk update tampilan tombol
         this.render();
       }
     });
+  }
+
+  _initDrawer() {
+    const drawerButton = this.querySelector("#drawer-button");
+    const navigationDrawer = this.querySelector("#navigation-drawer");
+    const navLinks = this.querySelectorAll(".nav-list a");
+
+    if (drawerButton && navigationDrawer) {
+      drawerButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        navigationDrawer.classList.toggle("open");
+      });
+
+      document.body.addEventListener("click", (event) => {
+        if (!navigationDrawer.contains(event.target) && !drawerButton.contains(event.target)) {
+          navigationDrawer.classList.remove("open");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navigationDrawer.classList.remove("open");
+        });
+      });
+    }
   }
 
   render() {
@@ -123,8 +148,9 @@ class Navbar extends HTMLElement {
     this.innerHTML = `
     <header>
       <div class="main-header container">
-        <a class="brand-name" href="/">Story Buddy</a>
-
+        <div class="brand">
+          <img href="/" src="/images/logo.png" alt="Story Buddy Logo" class="brand-logo"  />
+        </div>
         <nav id="navigation-drawer" class="navigation-drawer">
           <ul id="nav-list" class="nav-list">
             ${

@@ -83,6 +83,19 @@ main {
   transition: all 0.2s ease-in-out;
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 50px;
+  padding: 5px;
+}
+
+.brand-logo {
+  height: 50px;
+  width: auto;
+}
+
 .brand-name {
   font-size: 1.5rem;
   font-weight: bold;
@@ -251,9 +264,10 @@ button {
 }
 
 .page-title {
-  font-size: 1.8rem;
   font-weight: 700;
-  color: #333;
+  font-size: 2rem;
+  color: steelblue;
+  margin-bottom: 1rem;
 }
 
 .page-subtitle {
@@ -295,9 +309,10 @@ button {
 }
 
 .section-title {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  color: #333;
+  color: steelblue;
+  margin-top: 0.8rem;
 }
 
 .story-list {
@@ -373,16 +388,8 @@ button {
 
   min-height: calc(100vh - header - footer);
   padding: 0 1.5rem;
-  background-color: #f9f9f9;
   text-align: center;
   color: #333;
-}
-
-.about-page h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: steelblue;
-  margin-bottom: 1rem;
 }
 
 .about-page p {
@@ -392,7 +399,7 @@ button {
   color: #555;
 }
 
-.about-page .about-content {
+.about-page .about-section {
   margin-top: 2rem;
   background: white;
   border-radius: 10px;
@@ -402,12 +409,12 @@ button {
   max-width: 800px;
 }
 
-.about-page .about-content h2 {
-  color: steelblue;
+.about-page .about-section h3 {
+  color: #292929;
   margin-bottom: 0.8rem;
 }
 
-.about-page .about-content p {
+.about-page .about-section p {
   color: #444;
   line-height: 1.7;
 }
@@ -571,10 +578,24 @@ input#lat {
   background-color: steelblue;
   color: #fff;
   text-align: center;
-  padding: 15px 0;
-  width: 100%;
+  padding: 20px 10px;
   font-size: 0.9rem;
   box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* EMPTY STATE FAVORITES */
+/* Agar pesan "Belum ada cerita" berada di tengah vertikal & horizontal */
+#favorite-stories:empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh; /* Minimal tinggi setengah layar */
+}
+
+/* Mengatur Z-Index SweetAlert agar di bawah Drawer tapi di atas konten */
+div.swal2-container {
+  z-index: 2000 !important; /* Pastikan lebih tinggi dari navbar (biasanya 1000) */
 }
 
 /* RESPONSIVE DESIGN */
@@ -595,6 +616,16 @@ input#lat {
 
   .story-card {
     flex-direction: column;
+  }
+
+  div.swal2-top-end {
+    top: 70px !important; /* Turunkan supaya tidak menutupi tombol drawer */
+    right: 10px !important;
+  }
+
+  .footer {
+    font-size: 0.8rem;
+    padding: 15px 5px;
   }
 }
 

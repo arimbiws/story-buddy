@@ -15,8 +15,6 @@ window.Swal = Swal; // agar bisa dipakai di komponen manapun
 
 const app = new App({
   content: document.getElementById("main-content"),
-  drawerButton: document.getElementById("drawer-button"),
-  navigationDrawer: document.getElementById("navigation-drawer"),
 });
 
 // gunakan hash routing supaya sesuai url-parser yang mengandalkan location.hash
@@ -111,7 +109,7 @@ window.addEventListener("online", async () => {
     });
 
     // Refresh halaman home jika sedang disana
-    if (window.location.hash === "" || window.location.hash === "#/") {
+    if (window.location.hash === "" || window.location.hash === "/") {
       window.dispatchEvent(new Event("hashchange"));
     }
   }

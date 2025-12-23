@@ -8,9 +8,9 @@ import NotificationHelper from "../../utils/notification-helper"; // Import baru
 const HomePage = {
   async render() {
     return `
-      <main class="container home-page">
+      <section class="container home-page">
         <header class="page-header">
-          <h1 class="page-title">Beranda Cerita</h1>
+          <h2 class="page-title">Beranda Cerita</h2>
           <p class="page-subtitle">Lihat kisah dan lokasi para pengguna di seluruh Indonesia</p>
         </header>
 
@@ -24,25 +24,24 @@ const HomePage = {
         </section>
 
         <section id="stories-section" aria-label="Daftar Cerita">
-          <h2 class="section-title">Daftar Cerita</h2>
-          <!-- INPUT PENCARIAN (Syarat Skilled IDB) -->
+          <h3 class="section-title">Daftar Cerita</h3>
           <div class="search-wrapper">
             <input 
               type="text" 
               id="searchStories" 
               placeholder="Cari cerita berdasarkan nama atau deskripsi..." 
               class="form-control"
-              style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc;"
+              style="padding: 12px; border-radius: 8px; border: 1px solid #d8d8d8ff;"
             />
           </div>
           <div id="stories" class="story-list"></div>
         </section>
-      </main>
+      </section>
     `;
   },
 
   async afterRender() {
-    // Inisialisasi MVP Pattern [cite: 174, 175]
+    // Inisialisasi MVP Pattern
     const model = new StoriesModel();
     const presenter = new HomePresenter({ view: this, model });
 
@@ -57,7 +56,7 @@ const HomePage = {
       presenter.searchStories(e.target.value);
     });
 
-    // Panggil Presenter untuk memulai logika [cite: 178]
+    // Panggil Presenter untuk memulai logika
     await presenter.showStories();
 
     // Animasi UI (Tugas View)

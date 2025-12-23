@@ -49,7 +49,7 @@ const DBHelper = {
   async deleteFromQueue(id) {
     return (await dbPromise).delete("offline-queue", id);
   },
-  
+
   // --- FAVORITES (BOOKMARK) ---
   async getFavorite(id) {
     return (await dbPromise).get("favorites", id);
