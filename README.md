@@ -1,56 +1,36 @@
-# App Starter Project with Webpack
+# 📖 Story Buddy App
 
-Proyek ini adalah setup dasar untuk aplikasi web yang menggunakan webpack untuk proses bundling, Babel untuk transpile JavaScript, serta mendukung proses build dan serving aplikasi.
+Story Buddy adalah aplikasi web berbasis **Single Page Application (SPA)** yang memungkinkan pengguna untuk berbagi cerita lengkap dengan foto dan lokasi, menyimpan cerita favorit, serta menikmati pengalaman **Progressive Web App (PWA)** dengan dukungan **offline mode** hingga **push notification**.
 
-## Table of Contents
+---
 
-- [Getting Started](#getting-started)
-- [Scripts](#scripts)
-- [Project Structure](#project-structure)
+## 🚀 Fitur Utama
 
-## Getting Started
+- 🔐 Autentikasi pengguna (Login & Register)
+- 🗺️ Peta interaktif untuk menampilkan lokasi cerita
+- 📝 Tambah cerita baru dengan foto dan lokasi
+- ❤️ Simpan & kelola cerita favorit (IndexedDB)
+- 🔎 Pencarian cerita berdasarkan nama & deskripsi
+- 🔔 Push Notification real-time
+- 📦 Progressive Web App (Installable & Offline)
+- 📶 Mode offline dengan sinkronisasi data otomatis
 
-### Prerequisites
+---
 
-- [Node.js](https://nodejs.org/) (disarankan versi 12 atau lebih tinggi)
-- [npm](https://www.npmjs.com/) (Node package manager)
+## 🧩 Teknologi yang Digunakan
 
-### Installation
+- JavaScript (ES6+)
+- Webpack
+- Workbox (Service Worker)
+- IndexedDB (idb)
+- Leaflet.js (Maps)
+- SweetAlert2
+- GSAP Animation
+- REST API Dicoding Story API
 
-1. Download starter project [di sini](https://raw.githubusercontent.com/dicodingacademy/a219-web-intermediate-labs/099-shared-files/starter-project-with-webpack.zip).
-2. Lakukan unzip file.
-3. Pasang seluruh dependencies dengan perintah berikut.
-   ```
-   npm install
-   ```
+---
 
-## Scripts
-
-- Build for Production:
-
-  ```
-  npm run build
-  ```
-
-  Script ini menjalankan webpack dalam mode production menggunakan konfigurasi `webpack.prod.js` dan menghasilkan sejumlah file build ke direktori `dist`.
-
-- Start Development Server:
-
-  ```
-  npm run start-dev
-  ```
-
-  Script ini menjalankan server pengembangan webpack dengan fitur live reload dan mode development sesuai konfigurasi di`webpack.dev.js`.
-
-- Serve:
-  ```
-  npm run serve
-  ```
-  Script ini menggunakan [`http-server`](https://www.npmjs.com/package/http-server) untuk menyajikan konten dari direktori `dist`.
-
-## Project Structure
-
-Proyek starter ini dirancang agar kode tetap modular dan terorganisir.
+## 🏗️ Struktur Proyek
 
 ```
 story-buddy/
@@ -119,3 +99,56 @@ story-buddy/
 ├── webpack.dev.js
 └── webpack.prod.js
 ```
+
+
+## 🧪 Kriteria Submission Dicoding - Proyek Kedua
+
+### ✅ Kriteria 1 – SPA & Fitur Dasar
+- SPA dengan hash routing
+- Transisi halaman
+- Peta & marker
+- Tambah data cerita
+- Aksesibilitas dasar
+
+### ✅ Kriteria 2 – Push Notification (Advanced)
+- Push dari server
+- Payload dinamis
+- Action button & navigasi
+- Toggle subscribe notifikasi
+
+### ✅ Kriteria 3 – PWA (Advanced)
+- Installable (Desktop & Mobile)
+- Offline mode (App Shell + Data)
+- Manifest lengkap (icons, screenshots, shortcuts)
+- Dynamic caching API
+
+### ✅ Kriteria 4 – IndexedDB (Advanced)
+- CRUD favorit
+- Pencarian & interaktivitas
+- Offline queue & sinkronisasi data
+
+### ✅ Kriteria 5 – Deploy Publik
+- Deploy ke GitHub Pages
+- URL aktif & dapat diakses
+
+---
+
+## ⚙️ Cara Menjalankan Proyek (Local)
+
+1. Clone repository:
+   ```
+   git clone https://github.com/arimbiws/story-buddy
+   ```
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Jalankan mode development:
+   ```
+   npm run start-dev
+   ```
+4. Akses di browser:
+   ```
+   http://localhost:3000
+   ```
+   
