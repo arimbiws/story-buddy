@@ -21,7 +21,7 @@ class StoryCard extends HTMLElement {
 
     this.innerHTML = `
       <div class="story-card">
-        <img src="${this._story.photoUrl}" alt="${this._story.name}" class="story-image"  loading="lazy"/>
+        <img src="${this._story.photoUrl}" alt="${this._story.name}" class="story-image"  loading="lazy" onerror="this.src='/images/placeholder.png'"/>
         <div class="story-content">
           <small class="story-date">${createdAt}</small>
           <h3 class="story-title">${this._story.name}</h3>
