@@ -46,7 +46,7 @@ self.addEventListener("fetch", (event) => {
   if (event.request.destination === "image") {
     event.respondWith(
       caches.match(event.request).then((response) => {
-        return response || matchPrecache("/images/placeholder.png");
+        return response || matchPrecache("./images/placeholder.png");
       })
     );
   }
@@ -72,8 +72,8 @@ self.addEventListener("push", (event) => {
 
   const options = {
     body: payloadOptions.body || "Ada cerita baru!",
-    icon: "./images/icons/maskable_icon_x192.png",
-    badge: "./images/icons/maskable_icon_x72.png",
+    icon: "/story-buddy/images/icons/maskable_icon_x192.png",
+    badge: "/story-buddy/images/icons/maskable_icon_x72.png",
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
