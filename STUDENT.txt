@@ -4,9 +4,6 @@ https://story-api.dicoding.dev/v1
 Map Tile Source:
 https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 
-Additional API Keys:
-Tidak digunakan (menggunakan layanan OpenStreetMap/Leaflet tanpa API key)
-
 Catatan:
 Aplikasi menggunakan Web API berikut:
 - Geolocation API untuk mendapatkan lokasi

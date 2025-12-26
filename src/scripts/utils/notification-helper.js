@@ -56,16 +56,33 @@ const NotificationHelper = {
 
   async unsubscribePush() {
     if (!("serviceWorker" in navigator)) return;
+
     const registration = await navigator.serviceWorker.ready;
     const subscription = await registration.pushManager.getSubscription();
 
-    if (subscription) {
-      // Unsubscribe dari browser
-      await subscription.unsubscribe();
+    if (!subscription) return;
 
-      console.log("Berhasil Unsubscribe");
-      return true;
-    }
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const subscriptionJson = subscription.toJSON();
+
+    // Hapus di SERVER
+    await fetch(config.PUSH_MSG_UNSUBSCRIBE_URL, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        endpoint: subscriptionJson.endpoint,
+      }),
+    });
+
+    // Hapus di BROWSER
+    await subscription.unsubscribe();
+
+    console.log("Unsubscribe berhasil (server + browser)");
   },
 
   // Fungsi Helper Private untuk Fetch ke API

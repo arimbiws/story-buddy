@@ -11,11 +11,19 @@ class StoryCard extends HTMLElement {
     const isFavorite = await DBHelper.getFavorite(this._story.id);
     const heartIconClass = isFavorite ? "fa-solid" : "fa-regular";
     const heartColor = isFavorite ? "red" : "gray";
+    const createdAt = this._story.createdAt
+      ? new Date(this._story.createdAt).toLocaleDateString("id-ID", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      : "-";
 
     this.innerHTML = `
       <div class="story-card">
         <img src="${this._story.photoUrl}" alt="${this._story.name}" class="story-image"  loading="lazy"/>
         <div class="story-content">
+          <small class="story-date">${createdAt}</small>
           <h3 class="story-title">${this._story.name}</h3>
           <p class="story-description">${this._story.description}</p>
 

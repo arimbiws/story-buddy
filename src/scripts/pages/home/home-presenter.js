@@ -4,7 +4,7 @@ class HomePresenter {
   constructor({ view, model }) {
     this.view = view;
     this.model = model;
-    this._stories = []; // Menyimpan semua cerita yang diambil
+    this._stories = [];
   }
 
   async showStories() {
@@ -20,11 +20,20 @@ class HomePresenter {
       // Ambil data dari Model (bisa dari API atau IDB jika offline)
       this._stories = await this.model.getAllStories();
 
+      if (this._stories.length === 0) {
+        // cache kosong + offline
+        this.view.showOfflineEmptyState();
+        return;
+      }
+
       // Tampilkan data awal (semua cerita)
       this.view.showStoriesList(this._stories);
       this.view.initMap(this._stories);
     } catch (error) {
-      console.error(error);
+      console.error("Gagal memuat cerita:", error);
+
+      // fallback ke error offline
+      this.view.showOfflineError();
     } finally {
       this.view.hideLoading();
     }

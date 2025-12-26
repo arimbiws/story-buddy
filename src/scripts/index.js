@@ -1,5 +1,4 @@
 // import "regenerator-runtime";
-// CSS imports
 import "../styles/style.css";
 import "./components/x-navbar";
 import "./components/x-footer";

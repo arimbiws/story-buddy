@@ -26,6 +26,9 @@ const HomePage = {
         <section id="stories-section" aria-label="Daftar Cerita">
           <h3 class="section-title">Daftar Cerita</h3>
           <div class="search-wrapper">
+            <label for="searchStories" class="visually-hidden">
+              Cari cerita
+            </label>
             <input 
               type="text" 
               id="searchStories" 
@@ -70,6 +73,24 @@ const HomePage = {
     } else {
       banner.style.display = "none";
     }
+  },
+
+  showOfflineEmptyState() {
+    const container = document.getElementById("stories");
+    container.innerHTML = `
+      <p style="text-align:center;">
+        Anda sedang offline dan belum ada data yang tersimpan.
+      </p>
+    `;
+  },
+
+  showOfflineError() {
+    const container = document.getElementById("stories");
+    container.innerHTML = `
+      <p style="text-align:center;">
+        Gagal memuat data. Periksa koneksi internet Anda.
+      </p>
+    `;
   },
 
   _initNotificationButton() {
