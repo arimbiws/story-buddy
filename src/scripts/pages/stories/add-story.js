@@ -12,7 +12,7 @@ const StoryPage = {
     return `
       <div class="container add-story-page">
         <header class="page-header">
-          <h2 class="page-title">Tambah Cerita</h2>
+          <h1 class="page-title">Tambah Cerita</h1>
           <p class="page-subtitle">Bagikan pengalamanmu dengan foto dan lokasi</p>
         </header>
 

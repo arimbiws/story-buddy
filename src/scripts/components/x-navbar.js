@@ -151,7 +151,7 @@ class Navbar extends HTMLElement {
         </div>
         <nav id="navigation-drawer" class="navigation-drawer">
           <div class="drawer-header">
-            <h2>Main Menu</h2>
+            <h1>Main Menu</h1>
           </div>
 
           <ul id="nav-list" class="nav-list">

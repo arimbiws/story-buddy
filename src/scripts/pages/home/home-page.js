@@ -10,7 +10,7 @@ const HomePage = {
     return `
       <section class="container home-page">
         <header class="page-header">
-          <h2 class="page-title">Beranda Cerita</h2>
+          <h1 class="page-title">Beranda Cerita</h1>
           <p class="page-subtitle">Lihat kisah dan lokasi para pengguna di seluruh Indonesia</p>
         </header>
 
@@ -24,7 +24,7 @@ const HomePage = {
         </section>
 
         <section id="stories-section" aria-label="Daftar Cerita">
-          <h3 class="section-title">Daftar Cerita</h3>
+          <h2 class="section-title">Daftar Cerita</h2>
           <div class="search-wrapper">
             <label for="searchStories" class="visually-hidden">
               Cari cerita

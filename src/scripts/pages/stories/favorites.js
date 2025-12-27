@@ -6,7 +6,7 @@ const FavoritesPage = {
     return `
       <section class="container favorites-page">
         <header class="page-header">
-          <h2 class="page-title">Cerita Favorit</h2>
+          <h1 class="page-title">Cerita Favorit</h1>
           <p class="page-subtitle">Lihat kembali cerita-cerita yang telah Anda simpan sebagai favorit</p>
         </header>
 
